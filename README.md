@@ -42,7 +42,6 @@ An enterprise-grade **Streamlit** platform in Python to benchmark, profile, and 
 ## 📁 Project Architecture
 
 ```
-nlp ese/
 ├── app.py                     # Main Streamlit dashboard UI with 8 tabs & theme toggle
 ├── evaluator.py               # Multi-model evaluation engine (WER, CER, EER, NumER, DER, BLEU)
 ├── audio_analyzer.py          # Acoustic analyzer (SNR dB, clipping, VAD silence, WPM pace, noise curves)
