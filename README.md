@@ -1,72 +1,116 @@
-# 🎙️ Enterprise Multi-Model ASR Benchmark & Audio KPI Evaluation Platform
+# 🎙️ Enterprise Class-wise STT Benchmarking System
 
-An enterprise-grade **Streamlit** platform in Python to benchmark, profile, and evaluate **all leading Speech-to-Text (ASR) models** simultaneously against **Ground Truth Transcripts**, **Acoustic Quality**, **Domain Terminology**, **Multi-Speaker Diarization**, and **Cost Constraints**.
+![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
----
+A comprehensive, parallelized benchmarking platform designed to evaluate and compare 8+ Speech-to-Text (ASR) architectures across specific domain classes (e.g., Healthcare, Technology, Legal). 
 
-## 🌟 Comprehensive 30 Feature Suite
-
-1. **Model Performance Dashboard**: Parallel benchmarking of 8+ models (Faster-Whisper Base/Small, OpenAI Whisper Base/Small, Google STT, Azure Speech, Deepgram Nova-2, AWS Transcribe).
-2. **Audio Quality Analysis**: Signal-to-Noise Ratio (SNR dB), Audio Clipping detection, RMS energy, Dynamic Range (dB), and Spectral Centroid/Brightness.
-3. **Noise Robustness Testing**: Dynamic acoustic stress testing with SNR degradation curves across Cafe, Street, and Telephony noise.
-4. **Accent & Speech Speed Analysis**: Words Per Minute (WPM), Syllables per second, and conversational pace rating (Slow/Normal/Fast).
-5. **Word-Level Confidence Analysis**: Word confidence probability distributions and low-confidence token highlighting (<80%, <50%).
-6. **Timestamped Transcript**: High-precision word-level & segment-level start/end timestamps `[MM:SS.ms]`.
-7. **Audio Waveform Synchronization**: Interactive Plotly waveform with amplitude envelope and time synchronization.
-8. **Error Heatmap**: 2D matrix heatmap (Models $\times$ Error Categories: Substitutions, Deletions, Insertions, Missed Entities, Missed Numbers).
-9. **Error Pattern Analysis**: Token-level alignment and deep decomposition into phonetic confusions and structural errors.
-10. **Domain-wise Benchmarking**: 6 preloaded enterprise scenarios (Medical, Finance, Legal, AI/Tech, Call Center Telephony, Multilingual Translation) with domain-specific metrics (Med-WER / EER, NumER).
-11. **Cost vs Accuracy Analysis**: Real-world ASR pricing models (\$ / 1,000 audio hours) vs Word Accuracy Pareto Frontier.
-12. **Real-Time Microphone Transcription**: In-browser live microphone voice recording with instant multi-model benchmarking.
-13. **AI Model Recommendation Engine**: Multi-criteria decision engine providing persona-based recommendations (Champion, Mission-Critical, Real-Time Streaming, Budget).
-14. **Custom Performance Weighting**: Interactive sliders for Accuracy, Latency, Cost, Semantic Similarity, and Domain Entities to dynamically calculate custom Champion Scores.
-15. **Benchmark History Tracking**: Session log tracking of benchmark runs with trend analysis over time.
-16. **Experiment Comparison**: Side-by-side metric comparison between different benchmark experiments.
-17. **Automated PDF / HTML Report Generation**: Downloadable standalone printable executive HTML/PDF report with scorecards, radar charts, and AI diagnostics.
-18. **Dark / Light Mode**: Seamless theme styling toggle directly accessible in the UI.
-19. **System Architecture Visualization**: Interactive visual architecture card of the end-to-end multi-model ASR evaluation pipeline.
-20. **AI Results Assistant**: Natural language diagnostic engine explaining failure root causes, acoustic hurdles, and prompt-tuning suggestions.
-21. **Multi-Model Parallel Transcription**: Concurrent execution across multiple ASR backends.
-22. **Punctuation & Capitalization Analysis**: Punctuation retention ratio and raw vs normalized WER penalty.
-23. **Speaker Diarization**: Multi-speaker dialogue segmentation (Doctor vs Patient / Agent vs Customer), Diarization Error Rate (DER %), and speaker-specific WER.
-24. **Language Detection**: Spoken language identification (LID) and probability confidence scoring.
-25. **Multilingual Transcription**: Multi-language evaluation across Spanish, French, German, Hindi, and English.
-26. **Translation Accuracy Evaluation**: Cross-lingual speech translation benchmarking with BLEU-1, BLEU-2, and semantic similarity.
-27. **Audio Silence & Speech Detection**: Energy-based Voice Activity Detection (VAD), silence ratio, and speech-to-pause ratio.
-28. **Real-Time Latency Monitoring**: Processing time, Real-Time Factor (RTF), and throughput (words/sec).
-29. **Model Failure/Error Detection**: Automated detection of ASR repetition loops, empty outputs, and silent dropouts.
-30. **Interactive Transcript Diff Viewer**: Multi-model synchronized token diff viewer with color badges (🟢 Correct, 🟠 Substitution, 🔴 Deletion, 🔵 Insertion).
+Instead of just looking at overall accuracy, this system provides **Class-wise Domain-Specific** insights, dynamically revealing which AI models perform best on specific types of content, vocabularies, and acoustic environments.
 
 ---
 
-## 📁 Project Architecture
+## ✨ Key Features
 
+- **📂 Class-wise Dataset Management**: Organize your audio files into specific domains (Classes). Upload multiple audio files (`.wav, .mp3, .m4a, .mp4`, etc.) and pair them with ground-truth reference transcripts.
+- **🚀 Parallel Execution Engine**: Run 8+ STT models concurrently utilizing thread-pooling for massive speedups. 
+- **📊 Advanced ASR Metrics**: Calculates clamped, production-grade metrics including **WER, CER, BLEU, ROUGE-L, and METEOR**.
+- **🏥 Domain Jargon Analysis**: Specialized evaluation for Entity Error Rate (EER) and Numeric Error Rate (NumER) to see how models handle specialized vocabulary.
+- **🔊 Acoustic & VAD Profiling**: Evaluates background noise (SNR dB), audio clipping, and Voice Activity Detection (speech-to-silence ratios).
+- **📉 Interactive Dashboards**: Beautiful Plotly-powered visualizations including 2D Error Heatmaps, Radar Charts, and Cost vs. Accuracy Pareto Frontiers.
+- **🤖 Automated AI Analysis**: The system dynamically generates an analytical summary detailing which model won which class and why, based on actual benchmark results.
+- **📜 CSV Executive Reporting**: Export all flattened metrics across all files, domains, and models into a consolidated CSV scorecard.
+
+---
+
+## 🤖 Supported STT Models
+
+The platform evaluates the following models (with built-in simulation fallbacks for missing API keys):
+1. **Faster-Whisper (Base)**
+2. **Faster-Whisper (Small)**
+3. **OpenAI Whisper (Base)**
+4. **OpenAI Whisper (Small)**
+5. **Google Speech-to-Text**
+6. **Microsoft Azure Speech**
+7. **Deepgram Nova-2**
+8. **AWS Transcribe**
+
+---
+
+## ⚙️ The 8-Step Workflow
+
+The Streamlit dashboard is structured around an intuitive 8-step pipeline:
+1. **Dataset & Classes**: Define domains and upload audio + reference pairs.
+2. **Dataset Review**: Verify your assembled multi-class dataset.
+3. **Select & Run**: Choose your target STT models and trigger the batch execution loop.
+4. **File Results**: Drill down into individual file performance, metrics, and leaderboards.
+5. **Class Comparison**: Visually compare average model performance grouped by domain class.
+6. **Error Analysis**: Inspect word-by-word diffs (Insertions, Deletions, Substitutions).
+7. **Final Analysis**: Read the auto-generated dynamic conclusion of the benchmark.
+8. **Report**: Download the final CSV scorecard for stakeholders.
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/yourusername/stt-benchmark-system.git
+cd stt-benchmark-system
 ```
-├── app.py                     # Main Streamlit dashboard UI with 8 tabs & theme toggle
-├── evaluator.py               # Multi-model evaluation engine (WER, CER, EER, NumER, DER, BLEU)
-├── audio_analyzer.py          # Acoustic analyzer (SNR dB, clipping, VAD silence, WPM pace, noise curves)
-├── transcription_engine.py    # Multi-model parallel ASR pipeline (8 backends), live mic, failure checks
-├── cost_recommender.py        # Cost vs accuracy Pareto, AI recommender & AI diagnostic assistant
-├── visualizer.py              # Visualizations (Multi-bar, Radar, 2D Heatmap, Waveforms, Multi-Diff)
-├── report_generator.py        # Printable Executive HTML/PDF report builder & CSV/JSON exporter
-├── sample_data/
-│   ├── __init__.py
-│   └── samples.py             # 6 domain datasets + multi-speaker + multilingual ground truths
-├── requirements.txt           # Python dependencies
+
+### 2. Create a virtual environment
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+*Make sure your `requirements.txt` includes: `streamlit, pandas, plotly, numpy, SpeechRecognition, openai-whisper, scipy, pydub, nltk, rouge-score, jiwer`.*
+
+### 4. NLTK Setup (One-time)
+The system uses NLTK for METEOR score calculations. The app handles this automatically, but you can pre-download the WordNet corpus by running:
+```python
+python -c "import nltk; nltk.download('wordnet')"
+```
+
+---
+
+## 💻 Usage
+
+Start the Streamlit application by running:
+
+```bash
+streamlit run app.py
+```
+
+The web dashboard will automatically open in your default browser at `http://localhost:8501`. 
+
+---
+
+## 📁 Project Structure
+
+```text
+stt-benchmark-system/
+│
+├── app.py                     # Main Streamlit application & UI workflow
+├── evaluator.py               # Core metrics engine (WER, CER, ROUGE, METEOR)
+├── transcription_engine.py    # Parallel STT execution & audio formatting
+├── visualizer.py              # Plotly chart generation & HTML rendering
+├── audio_analyzer.py          # SNR, VAD, and acoustic quality analysis
+├── cost_recommender.py        # Pareto frontier & cost efficiency logic
+├── report_generator.py        # PDF/HTML export generation
+├── sample_data/               # Directory for built-in sample audio generation
 └── README.md                  # Project documentation
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/stt-benchmark-system/issues).
 
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Launch the Application
-```bash
-streamlit run app.py
-```
-Open `http://localhost:8501` in your browser.
+## 📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
