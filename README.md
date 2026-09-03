@@ -1,4 +1,4 @@
-# 🎙️ Class-Wise Domain-Specific Speech-to-Text (STT) Benchmarking System
+# Class-Wise Domain-Specific Speech-to-Text (STT) Benchmarking System
 
 [![Python Version](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit Framework](https://img.shields.io/badge/Frontend-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
@@ -261,20 +261,6 @@ nlp-ese/
 
 ---
 
-## ❓ Frequently Asked Questions (FAQ) & Troubleshooting
 
-#### Q1: Why does Whisper print `UserWarning: FP16 is not supported on CPU`?
-**A:** Modern Whisper models default to half-precision (`FP16`) for Nvidia GPUs. When running locally on standard laptop CPUs, `FP32` precision is used instead. The code includes `fp16=False` to silence this warning automatically.
-
-#### Q2: Can I upload video files directly?
-**A:** **Yes!** The system accepts `.mp4`, `.mov`, `.mkv`, `.avi`, `.wav`, `.mp3`, and `.m4a`. The audio engine automatically extracts and resamples the audio stream to clean 16 kHz 16-bit mono PCM.
-
-#### Q3: Why did my WER score show 100%?
-**A:** If an audio file is completely silent or the model returns an empty transcript while the Ground Truth has text, 100% of the words are counted as Deletions ($D = N$), resulting in a 100% Word Error Rate.
-
-#### Q4: Are live API keys required?
-**A:** **No.** Local models (such as Faster-Whisper and OpenAI Whisper) run natively on your machine. For commercial APIs (Google, Azure, Deepgram, AWS), the application contains intelligent fallback simulations so you can test and demonstrate the complete workflow offline.
-
----
 
 
